@@ -14,6 +14,7 @@ export default {
   day: 'rdrDay',
   dayNumber: 'rdrDayNumber',
   dayPassive: 'rdrDayPassive',
+  holiday: 'rdrHoliday',
   dayToday: 'rdrDayToday',
   dayStartOfWeek: 'rdrDayStartOfWeek',
   dayEndOfWeek: 'rdrDayEndOfWeek',
@@ -49,5 +50,5 @@ export default {
   monthName: 'rdrMonthName',
   infiniteMonths: 'rdrInfiniteMonths',
   monthsVertical: 'rdrMonthsVertical',
-  monthsHorizontal: 'rdrMonthsHorizontal',
+  monthsHorizontal: 'rdrMonthsHorizontal'
 };
