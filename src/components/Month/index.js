@@ -45,7 +45,6 @@ class Month extends PureComponent {
       disabledDay,
       customWeekendDates
     } = this.props;
-    console.log('customWeekendDates111 ', customWeekendDates);
     const minDate = this.props.minDate && startOfDay(this.props.minDate);
     const maxDate = this.props.maxDate && endOfDay(this.props.maxDate);
     const monthDisplay = getMonthDisplayRange(

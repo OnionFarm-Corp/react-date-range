@@ -96,6 +96,17 @@ class Calendar extends PureComponent {
     this.list.scrollTo(targetMonthIndex);
     this.setState({ focusedDate: date });
   };
+
+  scrollToDate = date => {
+    const str_date = format(date, 'yyyy.MM');
+    const months = document.querySelectorAll('.rdrMonthName');
+    months.forEach(element => {
+      if (str_date == element.innerText) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  };
+
   updateShownDate = (props = this.props) => {
     const newProps = props.scroll.enabled
       ? {
@@ -118,12 +129,6 @@ class Calendar extends PureComponent {
     };
     this.setState({ preview });
   };
-  componentDidMount() {
-    if (this.props.scroll.enabled) {
-      // prevent react-list's initial render focus problem
-      setTimeout(() => this.focusToDate(this.state.focusedDate));
-    }
-  }
 
   componentDidUpdate(prevProps) {
     const propMapper = {
@@ -390,6 +395,22 @@ class Calendar extends PureComponent {
     const isLongMonth = differenceInDays(end, start, this.dateOptions) + 1 > 7 * 5;
     return isLongMonth ? scrollArea.longMonthHeight : scrollArea.monthHeight;
   };
+  componentDidMount() {
+    if (this.props.scroll.enabled) {
+      // prevent react-list's initial render focus problem
+      setTimeout(() => {
+        try {
+          this.focusToDate(this.state.focusedDate);
+        } catch (e) {}
+      });
+      if (this.props.isFocus) {
+        setTimeout(() => {
+          this.scrollToDate(this.state.focusedDate);
+        }, 500);
+      }
+    }
+  }
+
   render() {
     const {
       showDateDisplay,
@@ -405,7 +426,8 @@ class Calendar extends PureComponent {
       color,
       navigatorRenderer,
       className,
-      preview
+      preview,
+      isFocus
     } = this.props;
     const { scrollArea, focusedDate } = this.state;
     const isVertical = direction === 'vertical';
@@ -415,7 +437,6 @@ class Calendar extends PureComponent {
       ...range,
       color: range.color || rangeColors[i] || color
     }));
-    console.log('Calendar ranges ', ranges);
     return (
       <div
         className={classnames(this.styles.calendarWrapper, className)}

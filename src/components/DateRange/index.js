@@ -141,7 +141,6 @@ class DateRange extends Component {
         ref={target => {
           this.calendar = target;
         }}
-        customWeekendDates={['2023-06-23']}
       />
     );
   }
@@ -154,7 +153,8 @@ DateRange.defaultProps = {
   retainEndDateOnFirstSelection: false,
   rangeColors: ['#3d91ff', '#3ecf8e', '#fed14c'],
   disabledDates: [],
-  customWeekendDates: []
+  customWeekendDates: [],
+  isFocus: false
 };
 
 DateRange.propTypes = {
@@ -165,7 +165,8 @@ DateRange.propTypes = {
   ranges: PropTypes.arrayOf(rangeShape),
   moveRangeOnFirstSelection: PropTypes.bool,
   retainEndDateOnFirstSelection: PropTypes.bool,
-  customWeekendDates: PropTypes.array
+  customWeekendDates: PropTypes.array,
+  isFocus: PropTypes.bool
 };
 
 export default DateRange;
